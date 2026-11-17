@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Concept preview: keep out of Google until SANFU approves. Remove this line when it becomes their official site. -->
+<meta name="robots" content="noindex, nofollow">
+<title>SANFU 三福 — Auto Repair Shop in Davao City</title>
+<meta name="description" content="SANFU Autoshop Repair and Services, Davao City. PMS and oil change, EGR & turbo ultrasonic cleaning, computerized 3D wheel alignment, brake and clutch, engine overhaul, transmission, aircon, electrical, painting, immobilizer keys and OBD scanning. Affordable price, fast repair, excellent service.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,600;0,800;1,800;1,900&family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0A0A0B; --coal:#141416; --panel:#1B1B1F; --line:#2A2A30;
+    --red:#C8102E; --red-deep:#7A0A16; --red-glow:rgba(200,16,46,.35);
+    --white:#F5F5F7; --muted:#A3A3AD; --gold:#FFC23A;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--black);color:var(--white);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+  section{padding:96px 0;scroll-margin-top:64px}
+  h1,h2,h3,.brand{font-family:"Exo 2",sans-serif}
+  h2{font-size:clamp(32px,5vw,52px);font-style:italic;font-weight:900;line-height:1.05;letter-spacing:-.01em;text-transform:uppercase}
+  .kicker{display:inline-flex;align-items:center;gap:10px;color:var(--red);font:800 13px "Exo 2";letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px}
+  .kicker::before{content:"";width:28px;height:3px;background:var(--red);transform:skewX(-20deg)}
+  .lead{color:var(--muted);font-size:18px;max-width:560px}
+  .btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:800 15px "Exo 2";letter-spacing:.06em;text-transform:uppercase;padding:15px 26px;border-radius:8px;transition:transform .15s,background .15s,box-shadow .15s;border:2px solid transparent}
+  .btn svg{width:18px;height:18px}
+  .btn-red{background:var(--red);color:#fff;box-shadow:0 10px 30px var(--red-glow)}
+  .btn-red:hover{transform:translateY(-2px);background:#E0142F}
+  .btn-ghost{border-color:#3A3A42;color:var(--white)}
+  .btn-ghost:hover{border-color:var(--white);transform:translateY(-2px)}
+
+  /* header */
+  header{position:fixed;inset:0 0 auto;z-index:50;background:rgba(10,10,11,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-style:italic;font-weight:900;font-size:24px;letter-spacing:.02em}
+  .brand img{width:36px;height:36px;border-radius:50%}
+  .brand .jp{font-family:"Noto Sans JP";font-style:normal;font-weight:700;font-size:20px;color:var(--red)}
+  .nav ul{display:flex;gap:28px;list-style:none}
+  .nav ul a{text-decoration:none;color:var(--muted);font-weight:500;font-size:15px}
+  .nav ul a:hover{color:var(--white)}
+  .nav .btn{padding:10px 18px;font-size:13px}
+  @media (max-width:860px){.nav ul{display:none}}
+  @media (max-width:480px){.nav .btn{display:none}}
+
+  /* hero */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;overflow:hidden;
+    background:radial-gradient(900px 600px at 85% 30%, rgba(200,16,46,.35), transparent 60%),
+               radial-gradient(700px 500px at 10% 100%, rgba(122,10,22,.45), transparent 60%), var(--black)}
+  .hero::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 60px,rgba(255,255,255,.015) 60px 61px);pointer-events:none}
+  .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  .hero h1{font-style:italic;font-weight:900;font-size:clamp(52px,8.5vw,120px);line-height:.9;letter-spacing:.01em;white-space:nowrap}
+  .hero h1 .jp{font-family:"Noto Sans JP";font-style:normal;font-weight:700;font-size:.55em;color:var(--red);margin-left:.12em;vertical-align:.18em}
+  .hero .sub{font:600 15px "Exo 2";letter-spacing:.32em;text-transform:uppercase;color:var(--muted);margin:14px 0 26px}
+  .tagline{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:34px}
+  .tagline span{font:800 14px "Exo 2";font-style:italic;text-transform:uppercase;letter-spacing:.05em;padding:8px 14px;background:var(--panel);border-left:3px solid var(--red);border-radius:4px}
+  .ctas{display:flex;flex-wrap:wrap;gap:14px}
+  .hero-photo{position:relative}
+  .hero-photo .frame{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.6);transform:perspective(1200px) rotateY(-6deg);aspect-ratio:4/5}
+  .hero-photo img{width:100%;height:100%;object-fit:cover}
+  .rating-badge{position:absolute;left:-28px;bottom:36px;background:var(--white);color:var(--black);border-radius:12px;padding:14px 18px;box-shadow:0 20px 40px rgba(0,0,0,.5);text-decoration:none}
+  .rating-badge b{font:900 30px "Exo 2";display:block;line-height:1}
+  .stars{color:var(--gold);letter-spacing:2px;font-size:16px}
+  .rating-badge small{font-size:12px;color:#555}
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr}
+    .hero-photo{max-width:420px;margin:0 auto;width:100%}
+    .hero-photo .frame{transform:none}
+    .rating-badge{left:12px}
+  }
+
+  /* info strip */
+  .strip{background:var(--red);padding:0}
+  .strip .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+  .strip div{padding:22px 18px;border-right:1px solid rgba(255,255,255,.18);display:flex;flex-direction:column}
+  .strip div:last-child{border-right:0}
+  .strip small{font:800 11px "Exo 2";letter-spacing:.18em;text-transform:uppercase;opacity:.75}
+  .strip strong{font:800 17px "Exo 2";font-style:italic}
+  @media (max-width:820px){.strip .wrap{grid-template-columns:1fr 1fr}.strip div:nth-child(2){border-right:0}.strip div:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.18)}}
+
+  /* services */
+  .sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:24px;margin-bottom:48px}
+  .services{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(270px,300px);gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:6px 2px 22px;scrollbar-width:thin;scrollbar-color:var(--red) var(--panel)}
+  .services::-webkit-scrollbar{height:8px}
+  .services::-webkit-scrollbar-track{background:var(--panel);border-radius:99px}
+  .services::-webkit-scrollbar-thumb{background:var(--red);border-radius:99px}
+  .services .svc{scroll-snap-align:start}
+  .scroll-ctrl{display:flex;align-items:center;gap:10px}
+  .scroll-ctrl button{width:48px;height:48px;border-radius:50%;border:1px solid #3A3A42;background:var(--coal);color:var(--white);cursor:pointer;display:grid;place-items:center;transition:background .15s,border-color .15s}
+  .scroll-ctrl button:hover{background:var(--red);border-color:var(--red)}
+  .scroll-ctrl button:disabled{opacity:.35;cursor:default;background:var(--coal);border-color:#3A3A42}
+  .scroll-ctrl svg{width:20px;height:20px}
+  .scroll-ctrl .count{font:800 14px "Exo 2";color:var(--muted);letter-spacing:.1em;margin-right:6px}
+  .svc{background:var(--coal);border:1px solid var(--line);border-radius:var(--radius);padding:28px;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}
+  .svc:hover{border-color:var(--red);transform:translateY(-4px)}
+  .svc .num{position:absolute;right:18px;top:12px;font:900 italic 54px "Exo 2";color:rgba(255,255,255,.04)}
+  .svc .ic{width:48px;height:48px;border-radius:10px;background:rgba(200,16,46,.14);color:var(--red);display:grid;place-items:center;margin-bottom:18px}
+  .svc .ic svg{width:26px;height:26px}
+  .svc h3{font-style:italic;font-weight:800;font-size:19px;line-height:1.2;text-transform:uppercase;margin-bottom:10px}
+  .svc p{color:var(--muted);font-size:15px}
+  .svc ul{list-style:none;display:grid;gap:9px;margin-top:4px}
+  .svc li{display:flex;gap:10px;align-items:flex-start;color:#D6D6DC;font-size:15px;line-height:1.4}
+  .svc li::before{content:"";flex:0 0 8px;height:8px;margin-top:6px;background:var(--red);transform:skewX(-20deg)}
+  .svc.ask{background:var(--red);border-color:var(--red);display:flex;flex-direction:column;justify-content:space-between;gap:18px;background-image:radial-gradient(360px 260px at 100% 0,rgba(255,255,255,.18),transparent)}
+  .svc.ask:hover{border-color:#fff}
+  .svc.ask p{color:rgba(255,255,255,.9)}
+  .svc.ask .btn{background:#fff;color:var(--black);align-self:flex-start}
+  .svc.ask{min-height:100%}
+  @media (max-width:560px){.services{grid-auto-columns:82%}.scroll-ctrl .count{display:none}}
+
+  /* featured job */
+  .feature{background:linear-gradient(180deg,var(--coal),var(--black))}
+  .feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .pair figure{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);aspect-ratio:3/4}
+  .pair img{width:100%;height:100%;object-fit:cover}
+  .pair figcaption{position:absolute;left:12px;top:12px;font:900 italic 13px "Exo 2";letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:4px;background:var(--black)}
+  .pair figure:last-child figcaption{background:var(--red)}
+  .checks{list-style:none;margin:24px 0 32px;display:grid;gap:12px}
+  .checks li{display:flex;gap:12px;align-items:flex-start;color:var(--muted)}
+  .checks li::before{content:"";flex:0 0 20px;height:20px;margin-top:3px;border-radius:50%;background:var(--red) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3'%3E%3Cpath d='M5 12l5 5L19 7'/%3E%3C/svg%3E") center/12px no-repeat}
+  @media (max-width:900px){.feature-grid{grid-template-columns:1fr}}
+
+  /* gallery */
+  .gallery{columns:4 240px;column-gap:14px}
+  .gallery button{display:block;width:100%;margin-bottom:14px;break-inside:avoid;border:1px solid var(--line);border-radius:12px;overflow:hidden;padding:0;background:none;cursor:zoom-in;position:relative}
+  .gallery img{width:100%;transition:transform .4s}
+  .gallery button:hover img{transform:scale(1.04)}
+  .gallery button::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 0 var(--red);transition:box-shadow .2s;border-radius:12px}
+  .gallery button:hover::after{box-shadow:inset 0 0 0 3px var(--red)}
+  .social-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+
+  /* reviews */
+  .reviews-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:stretch}
+  .score{background:var(--red);border-radius:var(--radius);padding:36px;display:flex;flex-direction:column;justify-content:center;background-image:radial-gradient(400px 300px at 100% 0,rgba(255,255,255,.18),transparent)}
+  .score b{font:900 italic 96px "Exo 2";line-height:1}
+  .score .stars{font-size:26px;color:var(--white);margin:6px 0 10px}
+  .score p{opacity:.9}
+  .review-list{display:grid;gap:16px}
+  .review{background:var(--coal);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;display:flex;gap:16px;align-items:center}
+  .avatar{flex:0 0 48px;height:48px;border-radius:50%;background:var(--panel);border:2px solid var(--red);display:grid;place-items:center;font:800 18px "Exo 2"}
+  .review strong{display:block;font-family:"Exo 2";font-size:17px}
+  .review small{color:var(--muted)}
+  .review.cta{border-style:dashed;justify-content:space-between;flex-wrap:wrap}
+  @media (max-width:860px){.reviews-grid{grid-template-columns:1fr}}
+
+  /* location */
+  .loc-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:24px}
+  .map{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);min-height:420px;filter:grayscale(.2) contrast(1.05)}
+  .map iframe{width:100%;height:100%;min-height:420px;border:0;display:block}
+  .loc-card{background:var(--coal);border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:22px}
+  .loc-card small{font:800 11px "Exo 2";letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+  .loc-card p{font-size:17px}
+  .loc-card a{text-decoration:none}
+  .loc-card a:hover{color:var(--red)}
+  @media (max-width:860px){.loc-grid{grid-template-columns:1fr}.map,.map iframe{min-height:320px}}
+
+  /* contact */
+  .contact{position:relative;text-align:center;overflow:hidden;background:radial-gradient(700px 400px at 50% 0,rgba(200,16,46,.35),transparent 70%),var(--black);border-top:1px solid var(--line)}
+  .contact h2{font-size:clamp(40px,7vw,80px)}
+  .contact .lead{margin:16px auto 34px}
+  .contact .ctas{justify-content:center}
+  .contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;margin-top:34px;color:var(--muted)}
+  .contact-links a{text-decoration:none}
+  .contact-links a:hover{color:var(--white)}
+
+  footer{border-top:1px solid var(--line);padding:26px 0 30px;color:var(--muted);font-size:13px}
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+
+  /* mobile action bar */
+  .mbar{display:none}
+  @media (max-width:700px){
+    .mbar{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;inset:auto 0 0;z-index:60;background:var(--coal);border-top:1px solid var(--line)}
+    .mbar a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 0 12px;text-decoration:none;font:800 11px "Exo 2";letter-spacing:.1em;text-transform:uppercase}
+    .mbar a:first-child{background:var(--red)}
+    .mbar svg{width:20px;height:20px}
+    footer{padding-bottom:90px}
+  }
+
+  /* lightbox */
+  .lightbox{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:20px}
+  .lightbox.open{display:flex}
+  .lightbox img{max-width:100%;max-height:88vh;border-radius:10px}
+  .lightbox button{position:absolute;top:16px;right:16px;width:46px;height:46px;border-radius:50%;border:0;background:var(--red);color:#fff;font-size:22px;cursor:pointer}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top"><img src="images/logo.jpg" alt="SANFU logo">SANFU <span class="jp">三福</span></a>
+    <nav><ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Our Work</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#location">Location</a></li>
+    </ul></nav>
+    <a class="btn btn-red" href="tel:+639275811222">Call Now</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>SANFU<span class="jp">三福</span></h1>
+        <div class="sub">Autoshop Repair &amp; Services · Davao City</div>
+        <div class="tagline">
+          <span>Affordable Price</span><span>Fast Repair</span><span>Excellent Service</span>
+        </div>
+        <p class="lead">From EGR and turbo cleaning to full diagnostics, we bring your engine back to clean, smooth, factory-like performance, without the casa price.</p>
+        <div class="ctas" style="margin-top:32px">
+          <a class="btn btn-red" href="tel:+639275811222">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+            0927 581 1222</a>
+          <a class="btn btn-ghost" href="https://m.me/61584140202829" target="_blank" rel="noopener">Message us</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="frame"><img src="images/work4.jpg" alt="Toyota Fortuner being serviced at the SANFU shop"></div>
+        <a class="rating-badge" href="#reviews">
+          <b>5.0</b><span class="stars">★★★★★</span><br><small>Rated on Google</small>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO STRIP -->
+  <div class="strip">
+    <div class="wrap">
+      <div><small>Location</small><strong>Obrero, Davao City</strong></div>
+      <div><small>Landmark</small><strong>Front of Sacred Heart Parish</strong></div>
+      <div><small>Opens</small><strong>8:00 AM</strong></div>
+      <div><small>Call / Text</small><strong>0927 581 1222</strong></div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="kicker">What we do</div><h2>Services</h2></div>
+        <div>
+          <p class="lead" style="margin-bottom:18px">From a quick oil change to a full engine overhaul, one shop for your whole car. Scroll to see all 15 services →</p>
+          <div class="scroll-ctrl">
+            <span class="count">15 SERVICES</span>
+            <button type="button" id="svcPrev" aria-label="Previous services"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <button type="button" id="svcNext" aria-label="Next services"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <div class="services" id="svcList">
+        <div class="svc"><span class="num">01</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+          <h3>Preventive Maintenance (PMS)</h3><p>Mileage-based check-ups: fluids, filters, belts and a full inspection to catch problems early.</p></div>
+        <div class="svc"><span class="num">02</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></div>
+          <h3>Engine Oil Change</h3><p>Fresh oil and a new filter to protect your engine and keep it running smooth.</p></div>
+        <div class="svc"><span class="num">03</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg></div>
+          <h3>EGR &amp; Turbo Ultrasonic Cleaning</h3><p>Ultrasonic cleaning removes carbon and oil buildup to bring back power and cut black smoke.</p></div>
+        <div class="svc"><span class="num">04</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/></svg></div>
+          <h3>Computerized 3D Wheel Alignment</h3><p>Computer-measured alignment so your car drives straight and your tires wear evenly.</p></div>
+        <div class="svc"><span class="num">05</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M5 7h14M5 7l-3 6h6zM19 7l-3 6h6z"/></svg></div>
+          <h3>Wheel Balancing</h3><p>Stops steering-wheel shake at speed and helps your tires last longer.</p></div>
+        <div class="svc"><span class="num">06</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/><path d="M9 15h6"/></svg></div>
+          <h3>ATF Fluid Change</h3><p>Fresh automatic transmission fluid for smoother shifting and a longer-lasting transmission.</p></div>
+        <div class="svc"><span class="num">07</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M19 5l-3 3"/></svg></div>
+          <h3>Brake &amp; Clutch Repair</h3><p>Pads, discs and clutch work so you can stop safely and shift smoothly.</p></div>
+        <div class="svc"><span class="num">08</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7V4M12 7V4M17 7V4M7 17v3M12 17v3M17 17v3"/></svg></div>
+          <h3>Engine Overhaul</h3><p>Full engine teardown and rebuild for low power, heavy smoke or high oil consumption.</p></div>
+        <div class="svc"><span class="num">09</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/><circle cx="12" cy="12" r="7"/></svg></div>
+          <h3>Transmission Repair</h3><p>Diagnosis and repair for slipping, hard-shifting or noisy transmissions.</p></div>
+        <div class="svc"><span class="num">10</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l2-5h14l2 5v4H3z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div>
+          <h3>Underchassis</h3><p>Suspension, steering and underbody repair for a quieter, more stable ride.</p></div>
+        <div class="svc"><span class="num">11</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div>
+          <h3>Electrical, Electronics &amp; Programming</h3><p>Wiring, sensors, lights and module programming, from simple faults to complex electronics.</p></div>
+        <div class="svc"><span class="num">12</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20M5 5l14 14M19 5 5 19"/></svg></div>
+          <h3>Aircon General Cleaning &amp; Repair</h3><p>Full aircon cleaning and repair for cold, fresh air even in Davao heat.</p></div>
+        <div class="svc"><span class="num">13</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></div>
+          <h3>Car Painting &amp; Repair</h3><p>Scratch, dent and body repair with paint matched to your car.</p></div>
+        <div class="svc"><span class="num">14</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14 9l2 2"/></svg></div>
+          <h3>Immobilizer Key Duplication</h3><p>Spare or replacement keys with immobilizer chips programmed to your car.</p></div>
+        <div class="svc"><span class="num">15</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h3l3-8 4 16 3-8h5"/></svg></div>
+          <h3>OBD Scanning</h3><p>Computer scan to read error codes and find out why your check engine light is on.</p></div>
+        <div class="svc ask"><div><h3>Not sure what's wrong?</h3><p>Tell us your car model and what you're noticing. We'll check it and give you a quote.</p></div>
+          <a class="btn" href="https://m.me/61584140202829" target="_blank" rel="noopener">Ask for a quote</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED JOB -->
+  <section class="feature">
+    <div class="wrap feature-grid">
+      <div class="pair">
+        <figure><img src="images/work1.jpg" alt="Dirty turbo and EGR parts before cleaning" loading="lazy"><figcaption>Before</figcaption></figure>
+        <figure><img src="images/work3.jpg" alt="Clean intake and EGR parts after cleaning" loading="lazy"><figcaption>After</figcaption></figure>
+      </div>
+      <div>
+        <div class="kicker">Recent job</div>
+        <h2>Toyota Fortuner<br>EGR &amp; Turbo Ultrasonic Cleaning</h2>
+        <ul class="checks">
+          <li>Turbo, EGR valve and intake parts removed and inspected</li>
+          <li>Carbon and oil sludge cleaned from every part</li>
+          <li>Reinstalled and tested for smooth idle and full power</li>
+        </ul>
+        <a class="btn btn-red" href="https://m.me/61584140202829" target="_blank" rel="noopener">Book the same service</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="kicker">Before &amp; after</div><h2>Our Work</h2></div>
+        <p class="lead">Real photos from our shop floor. Tap any photo to see it bigger.</p>
+      </div>
+      <div class="gallery" id="gallery">
+        <button><img src="images/work1.jpg" alt="Before: dirty turbo parts" loading="lazy"></button>
+        <button><img src="images/work2.jpg" alt="After: clean intake manifold" loading="lazy"></button>
+        <button><img src="images/work8.jpg" alt="Engine bay being serviced" loading="lazy"></button>
+        <button><img src="images/work6.jpg" alt="Before: carbon-covered turbo housing" loading="lazy"></button>
+        <button><img src="images/work5.jpg" alt="After: cleaned turbo housing" loading="lazy"></button>
+        <button><img src="images/work7.jpg" alt="Before: EGR and intake pipes" loading="lazy"></button>
+        <button><img src="images/work3.jpg" alt="After: clean EGR and throttle body" loading="lazy"></button>
+        <button><img src="images/work4.jpg" alt="SUV in the SANFU shop" loading="lazy"></button>
+      </div>
+      <div class="social-row">
+        <a class="btn btn-ghost" href="https://www.facebook.com/profile.php?id=61584140202829" target="_blank" rel="noopener">Watch videos on Facebook</a>
+        <a class="btn btn-ghost" href="https://www.tiktok.com/@sanfu.ph" target="_blank" rel="noopener">TikTok @sanfu.ph</a>
+        <a class="btn btn-ghost" href="https://www.instagram.com/sanfu.ph" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews" style="padding-top:24px">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="kicker">Customer reviews</div><h2>Rated 5 Stars</h2></div>
+      </div>
+      <div class="reviews-grid">
+        <div class="score">
+          <b>5.0</b>
+          <div class="stars">★★★★★</div>
+          <p>Every customer who rated us on Google gave us 5 stars.</p>
+        </div>
+        <div class="review-list">
+          <!-- Real Google reviews (star rating only, no comment text). Add real quotes here when customers leave written reviews. -->
+          <div class="review"><div class="avatar">P</div><div><strong>Paulo A.</strong><span class="stars">★★★★★</span><br><small>Google review</small></div></div>
+          <div class="review"><div class="avatar">S</div><div><strong>Sheena D.</strong><span class="stars">★★★★★</span><br><small>Google review · Local Guide</small></div></div>
+          <div class="review cta">
+            <div><strong>Had your car fixed at SANFU?</strong><small>Tell other drivers about your experience.</small></div>
+            <a class="btn btn-red" style="padding:11px 18px;font-size:13px" href="https://www.google.com/maps/place/Sanfu+Automotive+Repair+shop/@7.0857281,125.618055,17z/data=!4m6!3m5!1s0x32f96d001343cf97:0xcc25edbc61c40953!8m2!3d7.0857281!4d125.618055" target="_blank" rel="noopener">Write a review</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section id="location" style="padding-top:24px">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="kicker">Visit the shop</div><h2>Find Us</h2></div>
+      </div>
+      <div class="loc-grid">
+        <div class="map">
+          <iframe title="SANFU on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://maps.google.com/maps?q=Sanfu%20Automotive%20Repair%20shop%2C%2065%20Nicasio%20Torres%20St%2C%20Davao%20City&ll=7.0857281,125.618055&z=17&output=embed"></iframe>
+        </div>
+        <div class="loc-card">
+          <div><small>Address</small><p>65 Nicasio Torres St., Obrero, Davao City, Davao del Sur</p></div>
+          <div><small>Landmark</small><p>In front of Sacred Heart of Jesus Parish</p></div>
+          <div><small>Hours</small><p>Opens 8:00 AM</p></div>
+          <div><small>Contact</small><p><a href="tel:+639275811222">0927 581 1222</a><br><a href="tel:+63822973066">(082) 297 3066</a><br><a href="mailto:sanfu.ph@gmail.com">sanfu.ph@gmail.com</a></p></div>
+          <a class="btn btn-red" href="https://www.google.com/maps/dir/?api=1&destination=7.0857281,125.618055" target="_blank" rel="noopener">Get directions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="kicker" style="justify-content:center">Book your service</div>
+      <h2>Bring your car<br>to SANFU.</h2>
+      <p class="lead">Message us your car model and the problem, and we'll give you a quote. Walk-ins are welcome too.</p>
+      <div class="ctas">
+        <a class="btn btn-red" href="tel:+639275811222">Call 0927 581 1222</a>
+        <a class="btn btn-ghost" href="https://m.me/61584140202829" target="_blank" rel="noopener">Message on Facebook</a>
+      </div>
+      <div class="contact-links">
+        <a href="tel:+63822973066">Landline (082) 297 3066</a>
+        <a href="mailto:sanfu.ph@gmail.com">sanfu.ph@gmail.com</a>
+        <a href="https://www.facebook.com/profile.php?id=61584140202829" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/sanfu.ph" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@sanfu.ph" target="_blank" rel="noopener">TikTok</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr"></span> SANFU 三福 Autoshop Repair &amp; Services · Davao City</span>
+    <span>Watermark by <a href="https://kendamin.github.io" target="_blank" rel="noopener">Ken Abuda</a></span>
+  </div>
+</footer>
+
+<nav class="mbar" aria-label="Quick actions">
+  <a href="tel:+639275811222"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Call</a>
+  <a href="https://m.me/61584140202829" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12a9 9 0 0 1-13.5 7.8L3 21l1.2-4.5A9 9 0 1 1 21 12z"/></svg>Message</a>
+  <a href="https://www.google.com/maps/dir/?api=1&destination=7.0857281,125.618055" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Directions</a>
+</nav>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button id="lbClose" aria-label="Close">✕</button>
+  <img id="lbImg" alt="">
+</div>
+
+<script>
+  const lb = document.getElementById("lightbox"), lbImg = document.getElementById("lbImg");
+  document.getElementById("gallery").addEventListener("click", e => {
+    const img = e.target.closest("button")?.querySelector("img"); if(!img) return;
+    lbImg.src = img.src; lbImg.alt = img.alt; lb.classList.add("open");
+  });
+  const close = () => lb.classList.remove("open");
+  lb.addEventListener("click", e => { if(e.target === lb || e.target.id === "lbClose") close(); });
+  document.addEventListener("keydown", e => { if(e.key === "Escape") close(); });
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  // services carousel arrows
+  const list = document.getElementById("svcList"), prev = document.getElementById("svcPrev"), next = document.getElementById("svcNext");
+  const step = () => (list.querySelector(".svc")?.getBoundingClientRect().width || 300) + 18;
+  prev.addEventListener("click", () => list.scrollBy({left: -step() * 2}));
+  next.addEventListener("click", () => list.scrollBy({left: step() * 2}));
+  const sync = () => {
+    prev.disabled = list.scrollLeft <= 2;
+    next.disabled = list.scrollLeft + list.clientWidth >= list.scrollWidth - 2;
+  };
+  list.addEventListener("scroll", sync, {passive: true});
+  window.addEventListener("resize", sync);
+  sync();
+</script>
+</body>
+</html>
