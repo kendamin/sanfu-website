@@ -3,24 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- dark-only design: tell the browser before it paints, so there is no white flash -->
+<meta name="color-scheme" content="dark">
 <!-- Concept preview: keep out of Google until SANFU approves. Remove this line when it becomes their official site. -->
 <meta name="robots" content="noindex, nofollow">
 <title>SANFU 三福 — Auto Repair Shop in Davao City</title>
 <meta name="description" content="SANFU Autoshop Repair and Services, Davao City. PMS and oil change, EGR & turbo ultrasonic cleaning, computerized 3D wheel alignment, brake and clutch, engine overhaul, transmission, aircon, electrical, painting, immobilizer keys and OBD scanning. Affordable price, fast repair, excellent service.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,600;0,800;1,800;1,900&family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,600;0,800;1,800;1,900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Japanese font only for the two characters 三福: a tiny download instead of the whole font -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&text=%E4%B8%89%E7%A6%8F&display=swap" rel="stylesheet">
 <style>
   :root{
     --black:#0A0A0B; --coal:#141416; --panel:#1B1B1F; --line:#2A2A30;
     --red:#C8102E; --red-deep:#7A0A16; --red-glow:rgba(200,16,46,.35);
     --white:#F5F5F7; --muted:#A3A3AD; --gold:#FFC23A;
     --radius:14px;
+    color-scheme: dark; /* dark scrollbars and native controls */
   }
   *{box-sizing:border-box;margin:0;padding:0}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
   :focus-visible{outline:3px solid var(--white);outline-offset:3px}
-  body{background:var(--black);color:var(--white);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+  body{background:var(--black);color:var(--white);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;font-size-adjust:from-font}
+  /* quick taps on swipeable/tap targets: no double-tap zoom delay */
+  .services,.scroll-ctrl button,.mbar a,.gallery button{touch-action:manipulation}
   img{display:block;max-width:100%;height:auto}
   a{color:inherit}
   .wrap{max-width:1160px;margin:0 auto;padding:0 max(20px,env(safe-area-inset-right)) 0 max(20px,env(safe-area-inset-left))}
