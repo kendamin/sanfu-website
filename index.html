@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- Concept preview: keep out of Google until SANFU approves. Remove this line when it becomes their official site. -->
 <meta name="robots" content="noindex, nofollow">
 <title>SANFU 三福 — Auto Repair Shop in Davao City</title>
@@ -18,11 +18,12 @@
     --radius:14px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+  :focus-visible{outline:3px solid var(--white);outline-offset:3px}
   body{background:var(--black);color:var(--white);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
-  img{display:block;max-width:100%}
+  img{display:block;max-width:100%;height:auto}
   a{color:inherit}
-  .wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 max(20px,env(safe-area-inset-right)) 0 max(20px,env(safe-area-inset-left))}
   section{padding:96px 0;scroll-margin-top:64px}
   h1,h2,h3,.brand{font-family:"Exo 2",sans-serif}
   h2{font-size:clamp(32px,5vw,52px);font-style:italic;font-weight:900;line-height:1.05;letter-spacing:-.01em;text-transform:uppercase}
@@ -32,25 +33,37 @@
   .btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:800 15px "Exo 2";letter-spacing:.06em;text-transform:uppercase;padding:15px 26px;border-radius:8px;transition:transform .15s,background .15s,box-shadow .15s;border:2px solid transparent}
   .btn svg{width:18px;height:18px}
   .btn-red{background:var(--red);color:#fff;box-shadow:0 10px 30px var(--red-glow)}
-  .btn-red:hover{transform:translateY(-2px);background:#E0142F}
+  .btn-red:hover{background:#E0142F}
   .btn-ghost{border-color:#3A3A42;color:var(--white)}
-  .btn-ghost:hover{border-color:var(--white);transform:translateY(-2px)}
+  .btn-ghost:hover{border-color:var(--white)}
 
   /* header */
   header{position:fixed;inset:0 0 auto;z-index:50;background:rgba(10,10,11,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .nav{display:flex;align-items:center;gap:16px;height:64px}
+  .nav > *{flex-shrink:0;white-space:nowrap}
+  .site-nav{margin-left:auto}
   .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-style:italic;font-weight:900;font-size:24px;letter-spacing:.02em}
   .brand img{width:36px;height:36px;border-radius:50%}
   .brand .jp{font-family:"Noto Sans JP";font-style:normal;font-weight:700;font-size:20px;color:var(--red)}
-  .nav ul{display:flex;gap:28px;list-style:none}
-  .nav ul a{text-decoration:none;color:var(--muted);font-weight:500;font-size:15px}
-  .nav ul a:hover{color:var(--white)}
   .nav .btn{padding:10px 18px;font-size:13px}
-  @media (max-width:860px){.nav ul{display:none}}
-  @media (max-width:480px){.nav .btn{display:none}}
+  @media (max-width:480px){.nav .call-btn{display:none}}
+
+  /* nav: one list. Collapsed (default) = popover menu; .is-wide = inline links (set by script when they fit) */
+  .menu-button{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid #3A3A42;border-radius:8px;background:var(--coal);color:var(--white);font:800 13px "Exo 2";letter-spacing:.08em;text-transform:uppercase;cursor:pointer;anchor-name:--menu-button}
+  .menu-button svg{width:18px;height:18px}
+  .site-menu{list-style:none}
+  .site-menu a{text-decoration:none;color:var(--muted);font-weight:500;font-size:15px}
+  .site-menu a:hover{color:var(--white)}
+  .site-header .site-menu[popover]{position:fixed;inset:auto;top:72px;top:anchor(--menu-button bottom);right:16px;margin-top:8px;width:min(80dvw,18rem);max-height:calc(100dvh - 6rem);overflow:auto;padding:8px;background:var(--coal);border:1px solid var(--line);border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.6);color:var(--white)}
+  .site-header .site-menu[popover] a{display:block;padding:12px 14px;border-radius:8px;font:800 15px "Exo 2";letter-spacing:.06em;text-transform:uppercase;color:var(--white)}
+  .site-header .site-menu[popover] a:hover{background:var(--panel)}
+  .site-menu[popover]:not(:is(:popover-open, .\:popover-open)){display:none}
+  .site-header.is-wide .menu-button{display:none}
+  .site-header.is-wide .site-menu{display:flex;gap:28px}
+  .site-header.is-measuring *{transition:none!important}
 
   /* hero */
-  .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;overflow:hidden;
+  .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:120px 0 80px;overflow:hidden;
     background:radial-gradient(900px 600px at 85% 30%, rgba(200,16,46,.35), transparent 60%),
                radial-gradient(700px 500px at 10% 100%, rgba(122,10,22,.45), transparent 60%), var(--black)}
   .hero::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 60px,rgba(255,255,255,.015) 60px 61px);pointer-events:none}
@@ -86,7 +99,7 @@
 
   /* services */
   .sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:24px;margin-bottom:48px}
-  .services{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(270px,300px);gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:6px 2px 22px;scrollbar-width:thin;scrollbar-color:var(--red) var(--panel)}
+  .services{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(270px,300px);gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;padding:6px 2px 22px;scrollbar-width:thin;scrollbar-color:var(--red) var(--panel)}
   .services::-webkit-scrollbar{height:8px}
   .services::-webkit-scrollbar-track{background:var(--panel);border-radius:99px}
   .services::-webkit-scrollbar-thumb{background:var(--red);border-radius:99px}
@@ -98,7 +111,7 @@
   .scroll-ctrl svg{width:20px;height:20px}
   .scroll-ctrl .count{font:800 14px "Exo 2";color:var(--muted);letter-spacing:.1em;margin-right:6px}
   .svc{background:var(--coal);border:1px solid var(--line);border-radius:var(--radius);padding:28px;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}
-  .svc:hover{border-color:var(--red);transform:translateY(-4px)}
+  .svc:hover{border-color:var(--red)}
   .svc .num{position:absolute;right:18px;top:12px;font:900 italic 54px "Exo 2";color:rgba(255,255,255,.04)}
   .svc .ic{width:48px;height:48px;border-radius:10px;background:rgba(200,16,46,.14);color:var(--red);display:grid;place-items:center;margin-bottom:18px}
   .svc .ic svg{width:26px;height:26px}
@@ -131,7 +144,6 @@
   .gallery{columns:4 240px;column-gap:14px}
   .gallery button{display:block;width:100%;margin-bottom:14px;break-inside:avoid;border:1px solid var(--line);border-radius:12px;overflow:hidden;padding:0;background:none;cursor:zoom-in;position:relative}
   .gallery img{width:100%;transition:transform .4s}
-  .gallery button:hover img{transform:scale(1.04)}
   .gallery button::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 0 var(--red);transition:box-shadow .2s;border-radius:12px}
   .gallery button:hover::after{box-shadow:inset 0 0 0 3px var(--red)}
   .social-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
@@ -177,31 +189,48 @@
   .mbar{display:none}
   @media (max-width:700px){
     .mbar{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;inset:auto 0 0;z-index:60;background:var(--coal);border-top:1px solid var(--line)}
-    .mbar a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 0 12px;text-decoration:none;font:800 11px "Exo 2";letter-spacing:.1em;text-transform:uppercase}
+    .mbar a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 0 calc(12px + env(safe-area-inset-bottom));text-decoration:none;font:800 11px "Exo 2";letter-spacing:.1em;text-transform:uppercase}
     .mbar a:first-child{background:var(--red)}
     .mbar svg{width:20px;height:20px}
-    footer{padding-bottom:90px}
+    footer{padding-bottom:calc(90px + env(safe-area-inset-bottom))}
   }
 
   /* lightbox */
-  .lightbox{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:20px}
-  .lightbox.open{display:flex}
-  .lightbox img{max-width:100%;max-height:88vh;border-radius:10px}
-  .lightbox button{position:absolute;top:16px;right:16px;width:46px;height:46px;border-radius:50%;border:0;background:var(--red);color:#fff;font-size:22px;cursor:pointer}
+  .lightbox{margin:auto;padding:0;border:0;background:none;max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);overflow:visible}
+  .lightbox::backdrop{background:rgba(0,0,0,.92)}
+  /* stop the page scrolling behind the open dialog (dialog guide: both rules) */
+  .lightbox:modal{overscroll-behavior:contain}
+  .lightbox::backdrop{overflow:hidden;overscroll-behavior:contain}
+  .lightbox img{max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);width:auto;height:auto;border-radius:10px}
+  .lightbox button{position:absolute;top:10px;right:10px;z-index:1;width:46px;height:46px;border-radius:50%;border:0;background:var(--red);color:#fff;font-size:22px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.5)}
+
+  /* motion only for people who haven't asked their phone to reduce it */
+  @media (prefers-reduced-motion: no-preference){
+    html,.services{scroll-behavior:smooth}
+    .btn-red:hover,.btn-ghost:hover{transform:translateY(-2px)}
+    .svc:hover{transform:translateY(-4px)}
+    .gallery button:hover img{transform:scale(1.04)}
+  }
 </style>
 </head>
 <body>
 
-<header>
+<header class="site-header">
   <div class="wrap nav">
-    <a class="brand" href="#top"><img src="images/logo.jpg" alt="SANFU logo">SANFU <span class="jp">三福</span></a>
-    <nav><ul>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#work">Our Work</a></li>
-      <li><a href="#reviews">Reviews</a></li>
-      <li><a href="#location">Location</a></li>
-    </ul></nav>
-    <a class="btn btn-red" href="tel:+639275811222">Call Now</a>
+    <a class="brand" href="#top"><img src="images/logo.jpg" width="36" height="36" alt="SANFU logo">SANFU <span class="jp">三福</span></a>
+    <nav class="site-nav" aria-label="Primary">
+      <button class="menu-button" type="button" popovertarget="site-menu" popovertargetaction="toggle" aria-controls="site-menu">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <span>Menu</span>
+      </button>
+      <ul id="site-menu" class="site-menu" popover="auto">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#work">Our Work</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#location">Location</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-red call-btn" href="tel:+639275811222">Call Now</a>
   </div>
 </header>
 
@@ -224,9 +253,9 @@
         </div>
       </div>
       <div class="hero-photo">
-        <div class="frame"><img src="images/work4.jpg" alt="Toyota Fortuner being serviced at the SANFU shop"></div>
+        <div class="frame"><img src="images/work4-1080.webp" srcset="images/work4-640.webp 640w, images/work4-1080.webp 1080w" sizes="(max-width:900px) min(420px, 100vw - 40px), 480px" width="1080" height="1437" fetchpriority="high" alt="Toyota Fortuner being serviced at the SANFU shop"></div>
         <a class="rating-badge" href="#reviews">
-          <b>5.0</b><span class="stars">★★★★★</span><br><small>Rated on Google</small>
+          <b>5.0</b><span class="stars" aria-hidden="true">★★★★★</span><span class="sr-only">5 out of 5 stars</span><br><small>Rated on Google</small>
         </a>
       </div>
     </div>
@@ -256,38 +285,39 @@
           </div>
         </div>
       </div>
-      <div class="services" id="svcList">
-        <div class="svc"><span class="num">01</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+      <p class="sr-only" id="svcStatus" role="status" aria-live="polite"></p>
+      <div class="services" id="svcList" role="region" aria-roledescription="carousel" aria-label="Our services" tabindex="0">
+        <div class="svc" role="group" aria-roledescription="slide" aria-label="1 of 16"><span class="num">01</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
           <h3>Preventive Maintenance (PMS)</h3><p>Mileage-based check-ups: fluids, filters, belts and a full inspection to catch problems early.</p></div>
-        <div class="svc"><span class="num">02</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></div>
+        <div class="svc" role="group" aria-roledescription="slide" aria-label="2 of 16"><span class="num">02</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></div>
           <h3>Engine Oil Change</h3><p>Fresh oil and a new filter to protect your engine and keep it running smooth.</p></div>
-        <div class="svc"><span class="num">03</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg></div>
+        <div class="svc" role="group" aria-roledescription="slide" aria-label="3 of 16"><span class="num">03</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg></div>
           <h3>EGR &amp; Turbo Ultrasonic Cleaning</h3><p>Ultrasonic cleaning removes carbon and oil buildup to bring back power and cut black smoke.</p></div>
-        <div class="svc"><span class="num">04</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/></svg></div>
+        <div class="svc" role="group" aria-roledescription="slide" aria-label="4 of 16"><span class="num">04</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/></svg></div>
           <h3>Computerized 3D Wheel Alignment</h3><p>Computer-measured alignment so your car drives straight and your tires wear evenly.</p></div>
-        <div class="svc"><span class="num">05</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M5 7h14M5 7l-3 6h6zM19 7l-3 6h6z"/></svg></div>
+        <div class="svc" role="group" aria-roledescription="slide" aria-label="5 of 16"><span class="num">05</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M5 7h14M5 7l-3 6h6zM19 7l-3 6h6z"/></svg></div>
           <h3>Wheel Balancing</h3><p>Stops steering-wheel shake at speed and helps your tires last longer.</p></div>
-        <div class="svc"><span class="num">06</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/><path d="M9 15h6"/></svg></div>
+        <div class="svc" role="group" aria-roledescription="slide" aria-label="6 of 16"><span class="num">06</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/><path d="M9 15h6"/></svg></div>
           <h3>ATF Fluid Change</h3><p>Fresh automatic transmission fluid for smoother shifting and a longer-lasting transmission.</p></div>
-        <div class="svc"><span class="num">07</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M19 5l-3 3"/></svg></div>
+        <div class="svc" role="group" aria-roledescription="slide" aria-label="7 of 16"><span class="num">07</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M19 5l-3 3"/></svg></div>
           <h3>Brake &amp; Clutch Repair</h3><p>Pads, discs and clutch work so you can stop safely and shift smoothly.</p></div>
-        <div class="svc"><span class="num">08</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7V4M12 7V4M17 7V4M7 17v3M12 17v3M17 17v3"/></svg></div>
+        <div class="svc" role="group" aria-roledescription="slide" aria-label="8 of 16"><span class="num">08</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7V4M12 7V4M17 7V4M7 17v3M12 17v3M17 17v3"/></svg></div>
           <h3>Engine Overhaul</h3><p>Full engine teardown and rebuild for low power, heavy smoke or high oil consumption.</p></div>
-        <div class="svc"><span class="num">09</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/><circle cx="12" cy="12" r="7"/></svg></div>
+        <div class="svc" role="group" aria-roledescription="slide" aria-label="9 of 16"><span class="num">09</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/><circle cx="12" cy="12" r="7"/></svg></div>
           <h3>Transmission Repair</h3><p>Diagnosis and repair for slipping, hard-shifting or noisy transmissions.</p></div>
-        <div class="svc"><span class="num">10</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l2-5h14l2 5v4H3z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div>
+        <div class="svc" role="group" aria-roledescription="slide" aria-label="10 of 16"><span class="num">10</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l2-5h14l2 5v4H3z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div>
           <h3>Underchassis</h3><p>Suspension, steering and underbody repair for a quieter, more stable ride.</p></div>
-        <div class="svc"><span class="num">11</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div>
+        <div class="svc" role="group" aria-roledescription="slide" aria-label="11 of 16"><span class="num">11</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div>
           <h3>Electrical, Electronics &amp; Programming</h3><p>Wiring, sensors, lights and module programming, from simple faults to complex electronics.</p></div>
-        <div class="svc"><span class="num">12</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20M5 5l14 14M19 5 5 19"/></svg></div>
+        <div class="svc" role="group" aria-roledescription="slide" aria-label="12 of 16"><span class="num">12</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20M5 5l14 14M19 5 5 19"/></svg></div>
           <h3>Aircon General Cleaning &amp; Repair</h3><p>Full aircon cleaning and repair for cold, fresh air even in Davao heat.</p></div>
-        <div class="svc"><span class="num">13</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></div>
+        <div class="svc" role="group" aria-roledescription="slide" aria-label="13 of 16"><span class="num">13</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></div>
           <h3>Car Painting &amp; Repair</h3><p>Scratch, dent and body repair with paint matched to your car.</p></div>
-        <div class="svc"><span class="num">14</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14 9l2 2"/></svg></div>
+        <div class="svc" role="group" aria-roledescription="slide" aria-label="14 of 16"><span class="num">14</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14 9l2 2"/></svg></div>
           <h3>Immobilizer Key Duplication</h3><p>Spare or replacement keys with immobilizer chips programmed to your car.</p></div>
-        <div class="svc"><span class="num">15</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h3l3-8 4 16 3-8h5"/></svg></div>
+        <div class="svc" role="group" aria-roledescription="slide" aria-label="15 of 16"><span class="num">15</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h3l3-8 4 16 3-8h5"/></svg></div>
           <h3>OBD Scanning</h3><p>Computer scan to read error codes and find out why your check engine light is on.</p></div>
-        <div class="svc ask"><div><h3>Not sure what's wrong?</h3><p>Tell us your car model and what you're noticing. We'll check it and give you a quote.</p></div>
+        <div class="svc ask" role="group" aria-roledescription="slide" aria-label="16 of 16"><div><h3>Not sure what's wrong?</h3><p>Tell us your car model and what you're noticing. We'll check it and give you a quote.</p></div>
           <a class="btn" href="https://m.me/61584140202829" target="_blank" rel="noopener">Ask for a quote</a></div>
       </div>
     </div>
@@ -297,8 +327,8 @@
   <section class="feature">
     <div class="wrap feature-grid">
       <div class="pair">
-        <figure><img src="images/work1.jpg" alt="Dirty turbo and EGR parts before cleaning" loading="lazy"><figcaption>Before</figcaption></figure>
-        <figure><img src="images/work3.jpg" alt="Clean intake and EGR parts after cleaning" loading="lazy"><figcaption>After</figcaption></figure>
+        <figure><img src="images/work1-640.webp" srcset="images/work1-640.webp 640w, images/work1-1080.webp 1080w" sizes="(max-width:900px) calc(50vw - 27px), 270px" width="640" height="479" alt="Dirty turbo and EGR parts before cleaning" loading="lazy"><figcaption>Before</figcaption></figure>
+        <figure><img src="images/work3-640.webp" srcset="images/work3-640.webp 640w, images/work3-1080.webp 1080w" sizes="(max-width:900px) calc(50vw - 27px), 270px" width="640" height="851" alt="Clean intake and EGR parts after cleaning" loading="lazy"><figcaption>After</figcaption></figure>
       </div>
       <div>
         <div class="kicker">Recent job</div>
@@ -321,14 +351,14 @@
         <p class="lead">Real photos from our shop floor. Tap any photo to see it bigger.</p>
       </div>
       <div class="gallery" id="gallery">
-        <button><img src="images/work1.jpg" alt="Before: dirty turbo parts" loading="lazy"></button>
-        <button><img src="images/work2.jpg" alt="After: clean intake manifold" loading="lazy"></button>
-        <button><img src="images/work8.jpg" alt="Engine bay being serviced" loading="lazy"></button>
-        <button><img src="images/work6.jpg" alt="Before: carbon-covered turbo housing" loading="lazy"></button>
-        <button><img src="images/work5.jpg" alt="After: cleaned turbo housing" loading="lazy"></button>
-        <button><img src="images/work7.jpg" alt="Before: EGR and intake pipes" loading="lazy"></button>
-        <button><img src="images/work3.jpg" alt="After: clean EGR and throttle body" loading="lazy"></button>
-        <button><img src="images/work4.jpg" alt="SUV in the SANFU shop" loading="lazy"></button>
+        <button type="button" aria-label="View larger: Before: dirty turbo parts"><img src="images/work1-640.webp" srcset="images/work1-640.webp 640w, images/work1-1080.webp 1080w" sizes="(max-width:540px) calc(100vw - 40px), 270px" width="640" height="479" alt="Before: dirty turbo parts" data-full="images/work1-1080.webp" loading="lazy"></button>
+        <button type="button" aria-label="View larger: After: clean intake manifold"><img src="images/work2-640.webp" srcset="images/work2-640.webp 640w, images/work2-1080.webp 1080w" sizes="(max-width:540px) calc(100vw - 40px), 270px" width="640" height="851" alt="After: clean intake manifold" data-full="images/work2-1080.webp" loading="lazy"></button>
+        <button type="button" aria-label="View larger: Engine bay being serviced"><img src="images/work8-640.webp" srcset="images/work8-640.webp 640w, images/work8-1080.webp 1080w" sizes="(max-width:540px) calc(100vw - 40px), 270px" width="640" height="851" alt="Engine bay being serviced" data-full="images/work8-1080.webp" loading="lazy"></button>
+        <button type="button" aria-label="View larger: Before: carbon-covered turbo housing"><img src="images/work6-640.webp" srcset="images/work6-640.webp 640w, images/work6-1080.webp 1080w" sizes="(max-width:540px) calc(100vw - 40px), 270px" width="640" height="851" alt="Before: carbon-covered turbo housing" data-full="images/work6-1080.webp" loading="lazy"></button>
+        <button type="button" aria-label="View larger: After: cleaned turbo housing"><img src="images/work5-640.webp" srcset="images/work5-640.webp 640w, images/work5-1080.webp 1080w" sizes="(max-width:540px) calc(100vw - 40px), 270px" width="640" height="640" alt="After: cleaned turbo housing" data-full="images/work5-1080.webp" loading="lazy"></button>
+        <button type="button" aria-label="View larger: Before: EGR and intake pipes"><img src="images/work7-640.webp" srcset="images/work7-640.webp 640w, images/work7-1080.webp 1080w" sizes="(max-width:540px) calc(100vw - 40px), 270px" width="640" height="851" alt="Before: EGR and intake pipes" data-full="images/work7-1080.webp" loading="lazy"></button>
+        <button type="button" aria-label="View larger: After: clean EGR and throttle body"><img src="images/work3-640.webp" srcset="images/work3-640.webp 640w, images/work3-1080.webp 1080w" sizes="(max-width:540px) calc(100vw - 40px), 270px" width="640" height="851" alt="After: clean EGR and throttle body" data-full="images/work3-1080.webp" loading="lazy"></button>
+        <button type="button" aria-label="View larger: SUV in the SANFU shop"><img src="images/work4-640.webp" srcset="images/work4-640.webp 640w, images/work4-1080.webp 1080w" sizes="(max-width:540px) calc(100vw - 40px), 270px" width="640" height="851" alt="SUV in the SANFU shop" data-full="images/work4-1080.webp" loading="lazy"></button>
       </div>
       <div class="social-row">
         <a class="btn btn-ghost" href="https://www.facebook.com/profile.php?id=61584140202829" target="_blank" rel="noopener">Watch videos on Facebook</a>
@@ -347,13 +377,13 @@
       <div class="reviews-grid">
         <div class="score">
           <b>5.0</b>
-          <div class="stars">★★★★★</div>
+          <div class="stars" aria-hidden="true">★★★★★</div><span class="sr-only">5 out of 5 stars</span>
           <p>Every customer who rated us on Google gave us 5 stars.</p>
         </div>
         <div class="review-list">
           <!-- Real Google reviews (star rating only, no comment text). Add real quotes here when customers leave written reviews. -->
-          <div class="review"><div class="avatar">P</div><div><strong>Paulo A.</strong><span class="stars">★★★★★</span><br><small>Google review</small></div></div>
-          <div class="review"><div class="avatar">S</div><div><strong>Sheena D.</strong><span class="stars">★★★★★</span><br><small>Google review · Local Guide</small></div></div>
+          <div class="review"><div class="avatar" aria-hidden="true">P</div><div><strong>Paulo A.</strong><span class="stars" aria-hidden="true">★★★★★</span><span class="sr-only">5 out of 5 stars</span><br><small>Google review</small></div></div>
+          <div class="review"><div class="avatar" aria-hidden="true">S</div><div><strong>Sheena D.</strong><span class="stars" aria-hidden="true">★★★★★</span><span class="sr-only">5 out of 5 stars</span><br><small>Google review · Local Guide</small></div></div>
           <div class="review cta">
             <div><strong>Had your car fixed at SANFU?</strong><small>Tell other drivers about your experience.</small></div>
             <a class="btn btn-red" style="padding:11px 18px;font-size:13px" href="https://search.google.com/local/writereview?placeid=ChIJl89DEwBt-TIRUwnEYbztJcw" target="_blank" rel="noopener">Write a review</a>
@@ -419,34 +449,75 @@
   <a href="https://www.google.com/maps/dir/?api=1&destination=7.0857281,125.618055" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Directions</a>
 </nav>
 
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
-  <button id="lbClose" aria-label="Close">✕</button>
+<dialog class="lightbox" id="lightbox" closedby="any" aria-label="Photo viewer">
+  <form method="dialog"><button aria-label="Close photo" autofocus>✕</button></form>
   <img id="lbImg" alt="">
-</div>
+</dialog>
 
 <script>
-  const lb = document.getElementById("lightbox"), lbImg = document.getElementById("lbImg");
-  document.getElementById("gallery").addEventListener("click", e => {
-    const img = e.target.closest("button")?.querySelector("img"); if(!img) return;
-    lbImg.src = img.src; lbImg.alt = img.alt; lb.classList.add("open");
-  });
-  const close = () => lb.classList.remove("open");
-  lb.addEventListener("click", e => { if(e.target === lb || e.target.id === "lbClose") close(); });
-  document.addEventListener("keydown", e => { if(e.key === "Escape") close(); });
   document.getElementById("yr").textContent = new Date().getFullYear();
 
-  // services carousel arrows
-  const list = document.getElementById("svcList"), prev = document.getElementById("svcPrev"), next = document.getElementById("svcNext");
-  const step = () => (list.querySelector(".svc")?.getBoundingClientRect().width || 300) + 18;
-  prev.addEventListener("click", () => list.scrollBy({left: -step() * 2}));
-  next.addEventListener("click", () => list.scrollBy({left: step() * 2}));
-  const sync = () => {
-    prev.disabled = list.scrollLeft <= 2;
-    next.disabled = list.scrollLeft + list.clientWidth >= list.scrollWidth - 2;
+  // ---- photo viewer: native <dialog> (focus, Esc, back gesture and focus return are built in)
+  const lb = document.getElementById("lightbox"), lbImg = document.getElementById("lbImg");
+  document.getElementById("gallery").addEventListener("click", e => {
+    const img = e.target.closest("button")?.querySelector("img"); if (!img) return;
+    lbImg.src = img.dataset.full || img.currentSrc || img.src; lbImg.alt = img.alt;
+    lb.showModal();
+  });
+  // closedby="any" (tap outside to close) is not in Safari yet: small fallback
+  if (!("closedBy" in HTMLDialogElement.prototype)) {
+    const outside = e => { const r = lbImg.getBoundingClientRect(); return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom; };
+    let pressedOutside = false;
+    lb.addEventListener("pointerdown", e => { pressedOutside = outside(e); });
+    lb.addEventListener("pointerup", e => { if (pressedOutside && outside(e) && !e.target.closest("button")) lb.close(); });
+  }
+
+  // ---- site nav: inline links when they fit, popover "Menu" when they don't (no fixed breakpoint)
+  const header = document.querySelector(".site-header"), row = header.querySelector(".nav"),
+        menu = document.getElementById("site-menu"), menuBtn = header.querySelector(".menu-button");
+  const hasPopover = Object.hasOwn(HTMLElement.prototype, "popover");
+  const isOpen = () => menu.matches(":is(:popover-open, .\\:popover-open)");
+  let lastWidth = 0;
+  const layoutNav = () => {
+    const width = row.clientWidth, wide = header.classList.contains("is-wide");
+    if (!wide && width <= lastWidth) { lastWidth = width; return; } // collapsed: only remeasure when it grows
+    lastWidth = width;
+    const wasOpen = isOpen();
+    header.classList.add("is-measuring", "is-wide");
+    menu.removeAttribute("popover"); menu.classList.remove(":popover-open");
+    const fits = row.scrollWidth <= row.clientWidth;
+    if (!fits) {
+      header.classList.remove("is-wide");
+      menu.setAttribute("popover", "auto");
+      if (wasOpen) hasPopover ? menu.showPopover() : menu.classList.add(":popover-open");
+    }
+    requestAnimationFrame(() => header.classList.remove("is-measuring"));
   };
-  list.addEventListener("scroll", sync, {passive: true});
-  window.addEventListener("resize", sync);
-  sync();
+  const ro = new ResizeObserver(layoutNav); ro.observe(header); ro.observe(menu);
+  // close the menu after picking a section
+  menu.addEventListener("click", e => {
+    if (!e.target.closest("a") || !menu.hasAttribute("popover")) return;
+    hasPopover ? menu.hidePopover() : menu.classList.remove(":popover-open");
+  });
+  // tiny fallback for browsers without the Popover API (no extra library)
+  if (!hasPopover) menuBtn.addEventListener("click", () => menu.classList.toggle(":popover-open"));
+
+  // ---- services carousel: native scroll-snap + looping arrows + status for screen readers
+  const list = document.getElementById("svcList"), prev = document.getElementById("svcPrev"),
+        next = document.getElementById("svcNext"), status = document.getElementById("svcStatus");
+  const slides = [...list.querySelectorAll(".svc")];
+  const step = () => (slides[0]?.getBoundingClientRect().width || 300) + 18;
+  const atStart = () => list.scrollLeft <= 2;
+  const atEnd = () => list.scrollLeft + list.clientWidth >= list.scrollWidth - 2;
+  prev.addEventListener("click", () => atStart() ? list.scrollTo({left: list.scrollWidth}) : list.scrollBy({left: -step() * 2}));
+  next.addEventListener("click", () => atEnd() ? list.scrollTo({left: 0}) : list.scrollBy({left: step() * 2}));
+  const announce = () => {
+    const box = list.getBoundingClientRect();
+    const seen = slides.map((s, i) => [s.getBoundingClientRect(), i + 1]).filter(([r]) => r.left >= box.left - 2 && r.right <= box.right + 2).map(([, n]) => n);
+    if (seen.length) status.textContent = seen.length > 1 ? `Showing services ${seen[0]} to ${seen.at(-1)} of ${slides.length}` : `Showing service ${seen[0]} of ${slides.length}`;
+  };
+  if ("onscrollend" in window) list.addEventListener("scrollend", announce);
+  else { let t; list.addEventListener("scroll", () => { clearTimeout(t); t = setTimeout(announce, 150); }, {passive: true}); }
 </script>
 </body>
 </html>
