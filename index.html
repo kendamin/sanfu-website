@@ -202,6 +202,26 @@
     footer{padding-bottom:calc(90px + env(safe-area-inset-bottom))}
   }
 
+  /* Message chooser: native modal <dialog>. Facebook/Messenger's in-app browser often won't hand
+     m.me links to the Messenger app, so we offer the app link, the web link and call/text. */
+  .msg{margin:auto;border:1px solid var(--line);padding:0;border-radius:18px;width:min(420px,calc(100dvw - 24px));background:var(--coal);color:var(--white);box-shadow:0 30px 80px rgba(0,0,0,.6)}
+  .msg:modal{overscroll-behavior:contain}
+  .msg::backdrop{background:rgba(0,0,0,.75);overflow:hidden;overscroll-behavior:contain}
+  .msg-inner{padding:24px 22px 22px;display:grid;gap:12px}
+  .msg-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+  .msg h2{font-size:26px;line-height:1.1}
+  .msg-head p{color:var(--muted);font-size:14px;margin-top:6px}
+  .msg-head form{flex:none}
+  .msg-close{width:40px;height:40px;padding:0;border-radius:50%;border:1px solid #3A3A42;background:var(--panel);color:var(--white);font-size:18px;font-weight:800;cursor:pointer}
+  .msg .btn{justify-content:center;width:100%;touch-action:manipulation}
+  .msg-note{font-size:14px;background:var(--panel);border-left:3px solid var(--red);border-radius:8px;padding:10px 12px;line-height:1.45;display:grid;gap:4px}
+  .msg-note-small{font-size:12px;color:var(--muted)}
+  .msg [hidden]{display:none}
+  @media (max-width:600px){
+    .msg:modal{margin:auto auto 0;width:100dvw;max-width:100dvw;border-radius:18px 18px 0 0;border-width:1px 0 0}
+    .msg-inner{padding-bottom:max(22px,env(safe-area-inset-bottom))}
+  }
+
   /* lightbox */
   .lightbox{margin:auto;padding:0;border:0;background:none;max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);overflow:visible}
   .lightbox::backdrop{background:rgba(0,0,0,.92)}
@@ -456,6 +476,24 @@
   <a href="https://www.google.com/maps/dir/?api=1&destination=7.0857281,125.618055" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Directions</a>
 </nav>
 
+<dialog class="msg" id="msgDialog" closedby="any" aria-labelledby="msg-title">
+  <div class="msg-inner">
+    <div class="msg-head">
+      <div><h2 id="msg-title">Message SANFU</h2><p>Send your car model and the problem, and we'll give you a quote.</p></div>
+      <form method="dialog"><button class="msg-close" aria-label="Close">✕</button></form>
+    </div>
+    <!-- opens the Messenger app directly (phones only; shown by the script) -->
+    <a class="btn btn-red" id="msgApp" hidden href="fb-messenger://user-thread/61584140202829">Open Messenger app</a>
+    <a class="btn btn-ghost" href="https://m.me/61584140202829" target="_blank" rel="noopener">Message on Facebook</a>
+    <a class="btn btn-ghost" href="tel:+639275811222">Call 0927 581 1222</a>
+    <a class="btn btn-ghost" href="sms:+639275811222">Send a text</a>
+    <div class="msg-note" id="msgNote" hidden>
+      <p>See <strong>"Get the Messenger app"</strong>? Tap <strong>Open in Messenger</strong> below it instead.</p>
+      <p class="msg-note-small">Still not opening? Tap <strong>•••</strong> and choose <strong>Open in browser</strong>.</p>
+    </div>
+  </div>
+</dialog>
+
 <dialog class="lightbox" id="lightbox" closedby="any" aria-label="Photo viewer">
   <form method="dialog"><button aria-label="Close photo" autofocus>✕</button></form>
   <img id="lbImg" alt="">
@@ -463,6 +501,27 @@
 
 <script>
   document.getElementById("yr").textContent = new Date().getFullYear();
+
+  // ---- Message chooser: every m.me button opens the chooser instead of jumping straight to Facebook.
+  // Without JavaScript the plain m.me links still work.
+  const msgDialog = document.getElementById("msgDialog");
+  const isPhone = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(navigator.userAgent));
+  const inFacebookApp = /FBAN|FBAV|FB_IAB|FBIOS|Messenger|Instagram/i.test(navigator.userAgent);
+  if (isPhone) document.getElementById("msgApp").hidden = false;          // app link only works on phones
+  if (inFacebookApp) document.getElementById("msgNote").hidden = false;  // tip only where the problem happens
+  document.addEventListener("click", e => {
+    const a = e.target.closest('a[href^="https://m.me/"]');
+    if (!a || msgDialog.contains(a)) return;
+    e.preventDefault();
+    msgDialog.showModal();
+    msgDialog.querySelector(".btn:not([hidden])")?.focus();         // start on the main action, not ✕
+  });
+  if (!("closedBy" in HTMLDialogElement.prototype)) {            // Safari: tap outside to close
+    let downOutside = false;
+    const outsideMsg = e => { const r = msgDialog.getBoundingClientRect(); return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom; };
+    msgDialog.addEventListener("pointerdown", e => { downOutside = outsideMsg(e); });
+    msgDialog.addEventListener("pointerup", e => { if (downOutside && outsideMsg(e)) msgDialog.close(); });
+  }
 
   // ---- photo viewer: native <dialog> (focus, Esc, back gesture and focus return are built in)
   const lb = document.getElementById("lightbox"), lbImg = document.getElementById("lbImg");
